@@ -5,8 +5,8 @@ export const getConfig = (env: EnvName) => {
 		case 'local':
 			return require('../config/local.json');
 		case 'dev':
-			return require(`../config/dev.json`);
+			return require(`webpack/config/dev.json`);
 		case 'prod':
-			return require(`../config/prod.json`);
+			return require(`webpack/config/prod.json`);
 	}
 };
