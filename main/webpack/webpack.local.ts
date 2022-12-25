@@ -25,6 +25,7 @@ export default (env: webpack.Configuration): Configuration => merge(common, {
 		new ModuleFederationPlugin({
 			name: 'main',
 			remotes: {
+				'Header': 'HEADER@http://localhost:9001/remote.js'
 			},
 			shared: {
 				react: {

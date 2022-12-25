@@ -20,7 +20,7 @@ const config: Configuration = {
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss', '.css']
-		
+
 	},
 	module: {
 		rules: [
@@ -55,18 +55,6 @@ const config: Configuration = {
 				]
 			}
 		]
-	},
-	devServer: {
-		compress: true,
-		port: 9000,
-		client: {
-			logging: 'error',
-			overlay: true,
-			progress: true,
-		},
-		hot: true,
-		open: true,
-		
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
