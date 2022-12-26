@@ -5,7 +5,6 @@ import {BrowserRouter} from "react-router-dom";
 
 const App: React.FC = () => {
 	return	<Header />
-	
 }
 
 export default App;

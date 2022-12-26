@@ -1,5 +1,6 @@
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
+import {exposes} from './config/exposes';
 
 interface Configuration extends WebpackConfiguration {
 	devServer?: WebpackDevServerConfiguration;
@@ -23,32 +24,24 @@ export default (env: webpack.Configuration): Configuration => merge(common, {
 	plugins: [
 		declare(env, 'local', (config) => ({...config, development: true})),
 		new ModuleFederationPlugin({
-			name: 'main',
+			name: 'STORE',
+			filename: 'remote.js',
+			exposes: {...exposes},
 			remotes: {
-				'Header': 'HEADER@http://localhost:9001/remote.js',
-				'Store': 'STORE@http://localhost:9003/remote.js'
+				'navigationConfig': 'NAVIGATION@http://localhost:9002/remote.js'
 			},
 			shared: {
 				react: {
 					singleton: true,
 					requiredVersion: dependencies["react"],
 				},
-				'react-dom': {
-					singleton: true,
-					requiredVersion: dependencies["react-dom"]
-				},
-				'react-router-dom': {
-					singleton: true,
-					requiredVersion: dependencies['react-router-dom']
-				}
 			},
 		})
 	],
 	devServer: {
 		static: path.join(__dirname, '../build'),
 		historyApiFallback: true,
-		port: 9000,
-		open: true,
+		port: 9003,
 		hot: true
 	},
 });

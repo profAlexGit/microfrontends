@@ -28,7 +28,8 @@ export default (env: webpack.Configuration): Configuration => merge(common, {
 			filename: 'remote.js',
 			exposes: {...exposes},
 			remotes: {
-				'navigationConfig': 'NAVIGATION@http://localhost:9002/remote.js'
+				'navigationConfig': 'NAVIGATION@http://localhost:9002/remote.js',
+				'store': 'STORE@http://localhost:9003/remote.js'
 			},
 			shared: {
 				react: {
