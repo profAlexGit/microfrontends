@@ -4,3 +4,22 @@
   background: darkcyan;
   padding: 16px 24px;
 }
+
+.navigation {
+  display: flex;
+  justify-content: start;
+}
+
+.navigationItem {
+  font-size: 18px;
+  color: #FFFFFF;
+
+  &:not(:last-child) {
+    margin-right: 16px;
+  }
+}
+
+.navigationItem_active {
+  color: tomato;
+  text-decoration: underline;
+}

@@ -1,3 +1,3 @@
 export const exposes = {
-    './header': '../src/App.tsx'
+    './header': '../src/components/Header/Header.tsx'
 }

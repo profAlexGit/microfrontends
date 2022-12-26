@@ -1,5 +1,6 @@
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
+import {exposes} from './config/exposes';
 
 interface Configuration extends WebpackConfiguration {
 	devServer?: WebpackDevServerConfiguration;
@@ -11,8 +12,6 @@ import path from 'path';
 import declare from './utils/declare';
 import webpack from 'webpack';
 import packageJson from '../package.json';
-const {dependencies} = packageJson;
-// const { dependencies } = require(path.resolve(__dirname, '../package.json'));
 
 const ModuleFederationPlugin = webpack.container.ModuleFederationPlugin;
 
@@ -23,31 +22,18 @@ export default (env: webpack.Configuration): Configuration => merge(common, {
 	plugins: [
 		declare(env, 'local', (config) => ({...config, development: true})),
 		new ModuleFederationPlugin({
-			name: 'main',
-			remotes: {
-				'Header': 'HEADER@http://localhost:9001/remote.js'
-			},
+			name: 'NAVIGATION',
+			filename: 'remote.js',
+			exposes: {...exposes},
 			shared: {
-				react: {
-					singleton: true,
-					requiredVersion: dependencies["react"],
-				},
-				'react-dom': {
-					singleton: true,
-					requiredVersion: dependencies["react-dom"]
-				},
-				'react-router-dom': {
-					singleton: true,
-					requiredVersion: dependencies['react-router-dom']
-				}
+			
 			},
 		})
 	],
 	devServer: {
 		static: path.join(__dirname, '../build'),
 		historyApiFallback: true,
-		port: 9000,
-		open: true,
+		port: 9002,
 		hot: true
 	},
 });

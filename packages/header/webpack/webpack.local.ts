@@ -27,6 +27,9 @@ export default (env: webpack.Configuration): Configuration => merge(common, {
 			name: 'HEADER',
 			filename: 'remote.js',
 			exposes: {...exposes},
+			remotes: {
+				'navigationConfig': 'NAVIGATION@http://localhost:9002/remote.js'
+			},
 			shared: {
 				react: {
 					singleton: true,
@@ -35,6 +38,10 @@ export default (env: webpack.Configuration): Configuration => merge(common, {
 				'react-dom': {
 					singleton: true,
 					requiredVersion: dependencies["react-dom"]
+				},
+				'react-router-dom': {
+					singleton: true,
+					requiredVersion: dependencies['react-router-dom']
 				}
 			},
 		})
@@ -43,7 +50,6 @@ export default (env: webpack.Configuration): Configuration => merge(common, {
 		static: path.join(__dirname, '../build'),
 		historyApiFallback: true,
 		port: 9001,
-		open: true,
 		hot: true
 	},
 });

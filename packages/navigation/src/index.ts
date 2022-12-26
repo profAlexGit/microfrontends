@@ -1,0 +1,1 @@
+import navigationConfig from "./navigationConfig";
